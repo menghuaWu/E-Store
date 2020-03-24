@@ -1,0 +1,176 @@
+﻿@model IEnumerable<MVC_FinalDemo.Models.tCart>
+@{
+    ViewBag.Title = "購物車";
+    Layout = "~/Views/Shared/_LayoutMemberIndex.cshtml";
+    string name = User.Identity.Name;
+}
+<script>
+    $(document).ready(function () {
+        //alert('@name');
+        var apiurl = "http://localhost:50728/api/GetCart";
+        cartInform();
+        function cartInform() {
+            $("#tbody").empty();
+            $.ajax({
+            url: apiurl + "?cName=" + encodeURI('@name'),
+            type: "GET",
+            success: function (data) {
+                if (data != null) {
+                    //alert("成功");
+                    if (data.length == 0) {
+                        alert("購物車無商品");
+                        $("#tbody").empty();
+                    } else {
+                        var ptotal = 0;
+                        for (var i = 0; i < data.length; i++) {
+                            $("#tbody").append(
+                                "<tr>"+
+                                "<td>"+
+                                data[i].fCustomerName+
+                                "</td>"+
+                                "<td>" +
+                                data[i].fProductName +
+                                "</td>"+
+                                "<td>" +
+                                data[i].fProductPrice +
+                                "</td>"+
+                                "<td>" +
+                                data[i].fProductCount +
+                                "</td>"+
+                                "<td>" +
+                                data[i].fTotalPrice +
+                                "</td>"+
+                                "<td>"+
+                                    "<button id='btnAdd"+ i +"' type='button' class='btn btn-success mx-1'>＋</button>"+
+                                    "<button id='btnMin"+ i +"' type='button' class='btn btn-warning mx-1'>－</button>"+
+                                    "<button id='btnDel"+ i +"' type='button' class='btn btn-danger mx-1 my-1'>刪除</button>"+
+                                "</td>"+
+                                "</tr>"
+                            );
+                            $("#btnAdd" + i).on("click", { cName: data[i].fCustomerName, pName: data[i].fProductName }, fnAdd)
+                            $("#btnMin" + i).on("click", { cName: data[i].fCustomerName, pName: data[i].fProductName }, fnMin)
+                            $("#btnDel" + i).on("click", { cName: data[i].fCustomerName, pName: data[i].fProductName }, fnDel)
+                            ptotal += data[i].fTotalPrice;
+                        }
+                        $("#total").html("<strong class='ml-5' >總計 : " + ptotal +"</strong>");
+                    }
+                } else {
+                    alert("取得資料失敗");
+                }
+            }
+        });
+        }
+        
+        function fnAdd(event) {
+            //alert("+");
+            var cName = event.data.cName;
+            var pName = event.data.pName;
+            //alert(cName + pName);
+            $.ajax({
+                url: apiurl + "?id=0&cName=" + encodeURI(cName) + "&pName=" + encodeURI(pName),
+                type: "PUT",
+                success: function (data) {
+                    if (data) {
+                        //alert(data);
+                        cartInform();
+                    }
+                }
+            });
+        }
+        function fnMin(event) {
+            //alert("-");
+            var cName = event.data.cName;
+            var pName = event.data.pName;
+            $.ajax({
+                url: apiurl + "?id=1&cName=" + encodeURI(cName) + "&pName=" + encodeURI(pName),
+                type: "PUT",
+                success: function (data) {
+                    if (data) {
+                        //alert(data);
+                        cartInform();
+                    } else {
+                        alert("已是最少數量");
+                    }
+                }
+            });
+        }
+        function fnDel(event) {
+            //alert("Del");
+            var cName = event.data.cName;
+            var pName = event.data.pName;
+            var r = confirm("是否刪除");
+            if (r) {
+                $.ajax({
+                    url: apiurl + "?cName=" + encodeURI(cName) + "&pName=" + encodeURI(pName),
+                    type: "DELETE",
+                    success: function (data) {
+                        if (data) {
+                            //alert(data);
+                            cartInform();
+                        } else {
+                            alert("刪除失敗");
+                        }
+                    }
+                });
+            }
+            
+        }
+    })
+</script>
+<h2>購物車</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.fCustomerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fProductPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fProductCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fTotalPrice)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="tbody">
+       
+    </tbody>
+</table>
+<div id="total" class="text-right">
+    
+</div>
+<div class="card mt-3">
+    <div class="card-header">
+        <div class="card-title">訂購資訊</div>
+    </div>
+    <div class="card-body">
+        <form>
+            <div class="form-group">
+                <label for="custID">訂購人</label>
+                <input type="text" id="custID" class="form-control" value=@name required />
+            </div>
+            <div class="form-group">
+                <label for="custPhone">連絡電話</label>
+                <input type="text" id="custPhone" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label for="custMail">信箱</label>
+                <input type="email" id="custMail" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label for="custDate">日期</label>
+                <input type="date" id="custDate" class="form-control" required />
+            </div>
+
+        </form>
+        <button type="button" class="btn btn-primary" id="btnSubmit">送出</button>
+    </div>
+</div>

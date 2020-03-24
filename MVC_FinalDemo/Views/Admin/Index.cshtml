@@ -1,0 +1,49 @@
+﻿@*管理員首頁*@
+
+@model IEnumerable<MVC_FinalDemo.Models.tProduct>
+
+@{
+    ViewBag.Title = "產品資料";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>產品資料</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.fProductID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fProductCatagory)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fProductPrice)
+        </th>
+     
+
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fProductID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fProductCatagory)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fProductPrice)
+        </td>
+
+
+    </tr>
+}
+
+</table>

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<MVC_FinalDemo.Models.tProduct>
+
+@{
+    ViewBag.Title = "產品列表";
+    Layout = "~/Views/Shared/_LayoutMember.cshtml";
+}
+
+<h2>產品列表</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.fProductID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fProductCatagory)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fProductPrice)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.fProductID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fProductCatagory)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fProductPrice)
+        </td>
+        <td>
+            @Html.ActionLink("加入購物車", "AddtoCart", new { pd=item.fProductName })
+           
+        </td>
+    </tr>
+}
+
+</table>
