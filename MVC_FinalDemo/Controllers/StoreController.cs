@@ -45,5 +45,24 @@ namespace MVC_FinalDemo.Controllers
             return RedirectToAction("Index", "Carts");
             
         }
+
+        [Authorize]
+        public ActionResult OrderInform()
+        {
+            var usr = User.Identity.Name;
+            var orders = db.tOrder.Where(m => m.fOrderID.Contains(usr)).ToList();
+            return View(orders);
+        }
+
+        [Authorize]
+        public ActionResult Delete(string oid)
+        {
+            var order = db.tOrder.Where(m=>m.fOrderID == oid).ToList();
+            var orderDtl = db.tOrderDetail.Where(m => m.fOrderID == oid).ToList();
+            db.tOrder.RemoveRange(order);
+            db.tOrderDetail.RemoveRange(orderDtl);
+            db.SaveChanges();
+            return RedirectToAction("OrderInform");
+        }
     }
 }

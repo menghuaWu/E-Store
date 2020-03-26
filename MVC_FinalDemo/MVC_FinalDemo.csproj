@@ -265,6 +265,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CartsController.cs" />
     <Compile Include="Controllers\GetCartController.cs" />
+    <Compile Include="Controllers\GetStoreController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
@@ -337,6 +338,7 @@
     <Content Include="Views\Shared\_LayoutAdminIndex.cshtml" />
     <Content Include="Views\Store\Index.cshtml" />
     <Content Include="Views\Carts\Index.cshtml" />
+    <Content Include="Views\Store\OrderInform.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

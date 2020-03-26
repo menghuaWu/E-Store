@@ -152,25 +152,20 @@
         <div class="card-title">訂購資訊</div>
     </div>
     <div class="card-body">
-        <form>
+        <form method="post" action="@Url.Action("Index")">
             <div class="form-group">
-                <label for="custID">訂購人</label>
-                <input type="text" id="custID" class="form-control" value=@name required />
+                <label for="custName">訂購人</label>
+                <input type="text" id="custName" name="custName" class="form-control" value=@name required />
             </div>
             <div class="form-group">
                 <label for="custPhone">連絡電話</label>
-                <input type="text" id="custPhone" class="form-control" required />
+                <input type="text" id="custPhone" name="custPhone" class="form-control" required />
             </div>
             <div class="form-group">
                 <label for="custMail">信箱</label>
-                <input type="email" id="custMail" class="form-control" required />
+                <input type="email" id="custMail" name="custMail" class="form-control" required />
             </div>
-            <div class="form-group">
-                <label for="custDate">日期</label>
-                <input type="date" id="custDate" class="form-control" required />
-            </div>
-
+            <button type="submit" class="btn btn-primary" id="btnSubmit">送出</button>
         </form>
-        <button type="button" class="btn btn-primary" id="btnSubmit">送出</button>
     </div>
 </div>
