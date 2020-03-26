@@ -10,6 +10,7 @@ namespace MVC_FinalDemo.Controllers
     public class StoreController : Controller
     {
         dbEStoreEntities db = new dbEStoreEntities();
+        ProductCategoryViewModel pcvm = new ProductCategoryViewModel();
         // GET: Store
         [Authorize]
         public ActionResult Index()
@@ -63,6 +64,15 @@ namespace MVC_FinalDemo.Controllers
             db.tOrderDetail.RemoveRange(orderDtl);
             db.SaveChanges();
             return RedirectToAction("OrderInform");
+        }
+
+        [Authorize]
+        public ActionResult Detail(int id=1)
+        {
+            var catName = db.tCatagory.Where(m => m.Id == id).FirstOrDefault();
+            pcvm.Products = db.tProduct.Where(m=>m.fProductCatagory == catName.fName).ToList();
+            pcvm.Category = db.tCatagory.ToList();
+            return View(pcvm);
         }
     }
 }

@@ -6,11 +6,33 @@ using System.Web.Mvc;
 using MVC_FinalDemo.Models;
 using System.Web.Security;
 
+
 namespace MVC_FinalDemo.Controllers
 {
     public class MemberController : Controller
     {
         dbEStoreEntities db = new dbEStoreEntities();
+
+        [Authorize]
+        public ActionResult Edit()
+        {
+            var cust = from m in db.tCustomer
+                       where m.fCustomerName == User.Identity.Name
+                       select m;
+                
+            return View(cust.FirstOrDefault());
+        }
+
+        [HttpPost]
+        public ActionResult Edit(tCustomer cus)
+        {
+            db.Entry(cus).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            TempData["Message"] = "請重新登入";
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login");
+        }
+
         // GET: Member
         public ActionResult Login()
         {
@@ -36,7 +58,9 @@ namespace MVC_FinalDemo.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Home");
+                    ViewBag.NotMember = true;
+                    return View();
+                    //return RedirectToAction("Index", "Home");
                 }
             }
             

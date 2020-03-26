@@ -12,9 +12,22 @@ namespace MVC_FinalDemo.Controllers
     {
         dbEStoreEntities db = new dbEStoreEntities();
         // GET: api/GetCart
-        public IEnumerable<string> Get()
+        public int Get()
         {
-            return new string[] { "value1", "value2" };
+            int count = 0;
+            var cart = db.tCart.ToList();
+            foreach (var item in cart)
+            {
+                if (item.fProductCount == 1)
+                {
+                    count++;
+                }
+                else
+                {
+                    count += (int)item.fProductCount;
+                }
+            }
+            return count;
         }
 
         // GET: api/GetCart/5
@@ -24,9 +37,32 @@ namespace MVC_FinalDemo.Controllers
             return carts;
         }
 
+
         // POST: api/GetCart
-        public void Post([FromBody]string value)
+        public bool Post(string pdName)
         {
+            var cartItem = db.tCart.Where(m => m.fProductName == pdName).FirstOrDefault();
+            if (cartItem != null)
+            {
+                cartItem.fProductCount++;
+                cartItem.fTotalPrice = cartItem.fProductPrice * cartItem.fProductCount;
+                db.SaveChanges();
+            }
+            else
+            {
+                var product = db.tProduct.Where(m => m.fProductName == pdName).FirstOrDefault();
+                tCart cart = new tCart()
+                {
+                    fCustomerName = User.Identity.Name,
+                    fProductCount = 1,
+                    fProductName = pdName,
+                    fProductPrice = product.fProductPrice,
+                    fTotalPrice = product.fProductPrice * 1
+                };
+                db.tCart.Add(cart);
+                db.SaveChanges();
+            }
+            return true;
         }
 
         // PUT: api/GetCart/5

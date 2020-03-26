@@ -81,7 +81,7 @@
         </td>
         <td>
             <button type="button" class="btn btn-info" onclick="fnDetail('@item.fOrderID')" data-toggle="modal" data-target="#dlg">明細</button>
-            @Html.ActionLink("刪除", "Delete", new { oid = item.fOrderID });
+            @Html.ActionLink("刪除", "Delete", new { oid = item.fOrderID }, new { @class="btn btn-danger"})
         </td>
     </tr>
 }

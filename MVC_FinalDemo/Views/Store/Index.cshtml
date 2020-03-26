@@ -39,8 +39,8 @@
             @Html.DisplayFor(modelItem => item.fProductPrice)
         </td>
         <td>
-            @Html.ActionLink("加入購物車", "AddtoCart", new { pd=item.fProductName })
-           
+            @Html.ActionLink("加入購物車", "AddtoCart", new { pd=item.fProductName }, new { @class="btn btn-warning", id="btnAdd"})
+            @*<button id="btnAdd" type="button" class="btn btn-warning">加入購物車</button>*@
         </td>
     </tr>
 }
