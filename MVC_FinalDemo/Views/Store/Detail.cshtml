@@ -3,6 +3,8 @@
 @{
     ViewBag.Title = "產品資料";
     Layout = "~/Views/Shared/_LayoutMemberIndex.cshtml";
+    
+
 }
 
 <h2>產品資料</h2>
@@ -31,6 +33,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Products.FirstOrDefault().fProductPrice)
                 </th>
+                <th></th>
             </tr>
 
             @foreach (var item in Model.Products)
@@ -48,7 +51,16 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.fProductPrice)
                     </td>
-
+                    <td>
+                        @if (ViewBag.NoUser == null)
+                        {
+                            @Html.ActionLink("加入購物車", "AddtoCart", new { pd = item.fProductName }, new { @class = "btn btn-warning btn-sm", id = "btnAdd" })
+                        }
+                        else
+                        {
+                            @Html.ActionLink("加入購物車", "AddtoCart", new { pd = item.fProductName }, new { @class = "btn btn-warning btn-sm disabled", id = "btnAdd" })
+                        }
+                    </td>
 
                 </tr>
             }

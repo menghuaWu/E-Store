@@ -12,7 +12,7 @@
         function cartInform() {
             $("#tbody").empty();
             $.ajax({
-            url: apiurl + "?cName=" + encodeURI('@name'),
+            url: apiurl + "?cName=" + encodeURIComponent ('@name'),
             type: "GET",
             success: function (data) {
                 if (data != null) {
@@ -67,7 +67,7 @@
             var pName = event.data.pName;
             //alert(cName + pName);
             $.ajax({
-                url: apiurl + "?id=0&cName=" + encodeURI(cName) + "&pName=" + encodeURI(pName),
+                url: apiurl + "?id=0&cName=" + encodeURIComponent(cName) + "&pName=" + encodeURIComponent (pName),
                 type: "PUT",
                 success: function (data) {
                     if (data) {
@@ -82,7 +82,7 @@
             var cName = event.data.cName;
             var pName = event.data.pName;
             $.ajax({
-                url: apiurl + "?id=1&cName=" + encodeURI(cName) + "&pName=" + encodeURI(pName),
+                url: apiurl + "?id=1&cName=" + encodeURIComponent (cName) + "&pName=" + encodeURIComponent (pName),
                 type: "PUT",
                 success: function (data) {
                     if (data) {
@@ -101,7 +101,7 @@
             var r = confirm("是否刪除");
             if (r) {
                 $.ajax({
-                    url: apiurl + "?cName=" + encodeURI(cName) + "&pName=" + encodeURI(pName),
+                    url: apiurl + "?cName=" + encodeURIComponent(cName) + "&pName=" + encodeURIComponent (pName),
                     type: "DELETE",
                     success: function (data) {
                         if (data) {

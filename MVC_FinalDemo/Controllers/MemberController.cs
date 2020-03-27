@@ -45,7 +45,7 @@ namespace MVC_FinalDemo.Controllers
             var root = db.tAdmin.Where(m=>m.fName == fCustomerName && m.fPassword == fCustomerPassword).FirstOrDefault();
             if (root != null)
             {
-                FormsAuthentication.RedirectFromLoginPage(root.fName, true);
+                FormsAuthentication.RedirectFromLoginPage(root.fName, false);
                 return RedirectToAction("Index", "Admin");
             }
             else
@@ -53,7 +53,7 @@ namespace MVC_FinalDemo.Controllers
                 var member = db.tCustomer.Where(m => m.fCustomerName == fCustomerName && m.fCustomerPassword == fCustomerPassword).FirstOrDefault();
                 if (member != null)
                 {
-                    FormsAuthentication.RedirectFromLoginPage(member.fCustomerName, true);
+                    FormsAuthentication.RedirectFromLoginPage(member.fCustomerName, false);
                     return RedirectToAction("Index", "Store");
                 }
                 else

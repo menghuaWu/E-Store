@@ -21,7 +21,7 @@ namespace MVC_FinalDemo.Controllers
         [Authorize]
         public ActionResult AddtoCart(string pd)
         {
-            var cartItem = db.tCart.Where(m=>m.fProductName == pd).FirstOrDefault();
+            var cartItem = db.tCart.Where(m=>m.fProductName == pd && m.fCustomerName == User.Identity.Name).FirstOrDefault();
             if (cartItem != null)
             {
                 cartItem.fProductCount++;
@@ -66,13 +66,21 @@ namespace MVC_FinalDemo.Controllers
             return RedirectToAction("OrderInform");
         }
 
-        [Authorize]
+      
         public ActionResult Detail(int id=1)
         {
             var catName = db.tCatagory.Where(m => m.Id == id).FirstOrDefault();
             pcvm.Products = db.tProduct.Where(m=>m.fProductCatagory == catName.fName).ToList();
             pcvm.Category = db.tCatagory.ToList();
-            return View(pcvm);
+            if (User.Identity.Name == "")
+            {
+                ViewBag.NoUser = true;
+                return View("Detail", "_LayoutIndex", pcvm);
+            }
+            else
+            {
+                return View(pcvm);
+            }
         }
     }
 }
