@@ -74,5 +74,11 @@ namespace MVC_FinalDemo.Controllers
             db.SaveChanges();
             return RedirectToAction("Member");
         }
+
+        [Authorize]
+        public ActionResult Order()
+        {
+            return View(db.tOrder.ToList());
+        }
     }
 }

@@ -1,0 +1,62 @@
+﻿@model IEnumerable<MVC_FinalDemo.Models.tOrder>
+
+@{
+    ViewBag.Title = "訂單管理";
+    Layout = "~/Views/Shared/_LayoutAdminIndex.cshtml";
+}
+
+<h2>訂單管理</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.fOrderID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fCustomerName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fCustomerPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fCustomerEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fState)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.fOrderID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fCustomerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fCustomerPhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fCustomerEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fState)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
