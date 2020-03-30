@@ -7,13 +7,18 @@
 
 <h2>產品資料</h2>
 <div class="row ">
-    <div class="col-md-1 my-5">
-        <div class="btn-group-vertical">
-            @foreach (var item in Model.Category)
-            {
-                <a href="@Url.Action("Product", new { id=item.Id})" class="btn btn-info">@item.fName</a>
-            }
-
+    <div class="col-md-2 my-5">
+        <div class="btn-group" role="group">
+            <div class="form-group">
+                <label for="dropdownBtn">類別篩選 :</label>
+                <button type="button" id="dropdownBtn" class="btn btn-info dropdown-toggle" data-toggle="dropdown">產品類別</button>
+                <div class="dropdown-menu" aria-labelledby="dropdownBtn">
+                    @foreach (var item in Model.Category)
+                    {
+                        <a href="@Url.Action("Product", new { id=item.Id})" class="btn btn-info dropdown-item">@item.fName</a>
+                    }
+                </div>
+            </div>
         </div>
     </div>
     <div class="col-md-8">
@@ -51,7 +56,7 @@
                     </td>
                     <td>
                         @Html.ActionLink("編輯", "Edit", new { pd = item.fProductName }, new { @class = "btn btn-success ", id = "btnAdd" })
-                        
+
                     </td>
 
                 </tr>

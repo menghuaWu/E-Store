@@ -43,5 +43,36 @@ namespace MVC_FinalDemo.Controllers
             var c = cat;
             return RedirectToAction("Product");
         }
+
+        [Authorize]
+        public ActionResult Member()
+        {
+            return View(db.tCustomer.ToList());
+        }
+
+        [Authorize]
+        public ActionResult CEdit(string cid)
+        {
+            var cust = db.tCustomer.Where(m => m.fCustomerID == cid).FirstOrDefault();
+            return View(cust);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult CEdit(tCustomer cus)
+        {
+            db.Entry(cus).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Member");
+        }
+
+        [Authorize]
+        public ActionResult CDelete(string cid)
+        {
+            var cust = db.tCustomer.Where(m=>m.fCustomerID == cid).FirstOrDefault();
+            db.Entry(cust).State = System.Data.Entity.EntityState.Deleted;
+            db.SaveChanges();
+            return RedirectToAction("Member");
+        }
     }
 }
