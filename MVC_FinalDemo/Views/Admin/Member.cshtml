@@ -5,11 +5,37 @@
     Layout = "~/Views/Shared/_LayoutAdminIndex.cshtml";
 }
 
+
+<script>
+    function fnDetail(mid) {
+        //alert(odr);
+        $("#mTitle").html("詳細資訊");
+        $("#tBody").empty();
+        var apiurl = "http://localhost:50728/api/GetMember";
+        $.ajax({
+            url: apiurl + "?mid=" + encodeURI(mid),
+            type: "GET",
+            success: function (data) {
+                
+
+                $("#tBody").append(
+                    "<tr>" +
+                    "<td>" + data.fCustomerName + "</td>" +
+                    "<td>" + data.fCustomerPassword + "</td>" +
+                    "<td>" + data.fCustomerPhone + "</td>" +
+                    "<td>" + data.fCustomerAddress + "</td>" +
+                    "<td>" + data.fCustomerEmail + "</td>" +
+                    "</tr>"
+                );
+
+                //$("#mFooter").html("合計 : " + totalPrice);
+            }
+        });
+    }
+</script>
+
 <h2>會員管理</h2>
 
-<p>
-    @Html.ActionLink("新增會員", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -22,43 +48,72 @@
             @Html.DisplayNameFor(model => model.fCustomerPassword)
         </th>
         @*<th>
-            @Html.DisplayNameFor(model => model.fCustomerPhone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fCustomerAddress)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.fCustomerEmail)
-        </th>*@
+                @Html.DisplayNameFor(model => model.fCustomerPhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fCustomerAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fCustomerEmail)
+            </th>*@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.fCustomerID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fCustomerName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fCustomerPassword)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.fCustomerPhone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fCustomerAddress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.fCustomerEmail)
-        </td>*@
-        <td>
-            @Html.ActionLink("編輯", "CEdit", new { cid=item.fCustomerID }, new { @class="btn btn-warning"})
-            @Html.ActionLink("詳細", "Details", new { id=item.Id }, new { @class = "btn btn-info" })
-            @Html.ActionLink("刪除", "CDelete", new { cid = item.fCustomerID }, new { @class = "btn btn-danger" })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.fCustomerID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fCustomerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fCustomerPassword)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.fCustomerPhone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fCustomerAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fCustomerEmail)
+                </td>*@
+            <td>
+                @Html.ActionLink("編輯", "CEdit", new { cid = item.fCustomerID }, new { @class = "btn btn-warning" })
+                <button type="button" class="btn btn-info" onclick="fnDetail('@item.fCustomerID')" data-toggle="modal" data-target="#dlg">詳細</button>
+                @Html.ActionLink("刪除", "CDelete", new { cid = item.fCustomerID }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
 
 </table>
+<div class="modal fade" id="dlg" >
+    <div style="max-width:800px;" class="modal-dialog" >
+        <div class="modal-content" >
+            <div class="modal-header">
+                <div class="modal-title" id="mTitle"></div>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <table class="table" id="tableshow">
+                    <thead>
+                        <tr>
+                            <th>帳號</th>
+                            <th>密碼</th>
+                            <th>電話</th>
+                            <th>地址</th>
+                            <th>信箱</th>
+                        </tr>
+                    </thead>
+                    <tbody class="border" id="tBody">
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer" id="mFooter">
+
+            </div>
+        </div>
+    </div>
+</div>
