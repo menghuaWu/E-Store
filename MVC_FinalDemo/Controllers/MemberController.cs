@@ -11,6 +11,8 @@ namespace MVC_FinalDemo.Controllers
 {
     public class MemberController : Controller
     {
+        
+        
         dbEStoreEntities db = new dbEStoreEntities();
 
         [Authorize]

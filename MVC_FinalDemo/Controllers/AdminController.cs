@@ -9,6 +9,19 @@ namespace MVC_FinalDemo.Controllers
 {
     public class AdminController : Controller
     {
+        public List<SelectListItem> GetItem()
+        {
+            List<SelectListItem> ls = new List<SelectListItem>()
+            {
+                new SelectListItem{ Text="未出貨", Value="未出貨"},
+                new SelectListItem{ Text="已出貨", Value="已出貨"},
+                new SelectListItem{ Text="已到貨", Value="已到貨"},
+                new SelectListItem{ Text="已付款", Value="已付款"}
+            };
+
+            return ls;
+        }
+        
         dbEStoreEntities db = new dbEStoreEntities();
         ProductCategoryViewModel pcvm = new ProductCategoryViewModel();
         // GET: Admin
@@ -114,6 +127,7 @@ namespace MVC_FinalDemo.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
+            ViewBag.Option = GetItem();
             return View(db.tOrder.ToList());
         }
         //[Authorize]
