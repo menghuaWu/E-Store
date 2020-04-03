@@ -50,27 +50,71 @@ namespace MVC_FinalDemo.Controllers
         }
 
         [Authorize]
-        public ActionResult Edit(string pd)
+        public ActionResult Category()
         {
-            if (User.Identity.Name != "root")
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            var product = db.tProduct.Where(m=>m.fProductName == pd).FirstOrDefault();
-            ViewBag.Opts = db.tCatagory.ToList();
-            return View(product);
+            return View(db.tCatagory.ToList());
+        }
+
+        [Authorize]
+        public ActionResult CaCreate()
+        {
+            return View();
         }
 
         [Authorize]
         [HttpPost]
-        public ActionResult Edit(tProduct cat)
+        public ActionResult CaCreate(string fName)
+        {
+            var cats = db.tCatagory.Where(m=>m.fName == fName).FirstOrDefault();
+            var count = db.tCatagory.ToList().Count();
+            var cid = "A";
+            
+            if (cats == null)
+            {
+                if (count < 10)
+                {
+                    cid += "0";
+                }
+                tCatagory cat = new tCatagory { 
+                    fCatagoryID = cid + (++count),
+                    fName = fName,
+                };
+                db.tCatagory.Add(cat);
+                db.SaveChanges();
+                return RedirectToAction("Category");
+            }
+            ViewBag.isCate = true;
+            return View();
+        }
+
+        [Authorize]
+        public ActionResult CaEdit(string cid)
         {
             if (User.Identity.Name != "root")
             {
                 return RedirectToAction("Index", "Home");
             }
-            var c = cat;
-            return RedirectToAction("Product");
+            var catagory = db.tCatagory.Where(m=>m.fCatagoryID == cid).FirstOrDefault();
+            return View(catagory);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult CaEdit(string fCatagoryID, string oldName, string fName)
+        {
+            if (User.Identity.Name != "root")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            var cats = db.tCatagory.Where(m=>m.fCatagoryID == fCatagoryID).FirstOrDefault();
+            cats.fName = fName;
+            var pds = db.tProduct.Where(m => m.fProductCatagory == oldName).ToList();
+            foreach (var pd in pds)
+            {
+                pd.fProductCatagory = fName;
+            }
+            db.SaveChanges();
+            return RedirectToAction("Category");
         }
 
         [Authorize]
