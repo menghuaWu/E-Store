@@ -190,5 +190,29 @@ namespace MVC_FinalDemo.Controllers
             db.SaveChanges();
             return RedirectToAction("Order");
         }
+
+        [Authorize]
+        public ActionResult PEdit(string pd)
+        {
+            if (User.Identity.Name != "root")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            var product = db.tProduct.Where(m=>m.fProductName == pd).FirstOrDefault();
+            ViewBag.Category = db.tCatagory.ToList();
+            return View(product);
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult PEdit(string fProductID, string fProductName, string fProductCatagory, int fProductPrice)
+        {
+            var pd = db.tProduct.Where(m => m.fProductID == fProductID).FirstOrDefault();
+            pd.fProductName = fProductName;
+            pd.fProductCatagory = fProductCatagory;
+            pd.fProductPrice = fProductPrice;
+            db.SaveChanges();
+            return RedirectToAction("Product", new { id = 1 }) ;
+        }
     }
 }
