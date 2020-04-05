@@ -1,0 +1,40 @@
+﻿@model IEnumerable<MVC_FinalDemo.Models.tCatagory>
+
+@{
+    ViewBag.Title = "類別管理";
+    Layout = "~/Views/Shared/_LayoutAdminIndex.cshtml";
+}
+
+<h2>類別管理</h2>
+
+<p>
+    @Html.ActionLink("新增", "CaCreate")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.fCatagoryID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.fCatagoryID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fName)
+            </td>
+            <td>
+                @Html.ActionLink("編輯", "CaEdit", new { cid = item.fCatagoryID }, new { @class="btn btn-warning btn-sm"})
+                @Html.ActionLink("刪除", "CaDelete", new { id = item.Id }, new { @class="btn btn-danger btn-sm"})
+            </td>
+        </tr>
+    }
+
+</table>
