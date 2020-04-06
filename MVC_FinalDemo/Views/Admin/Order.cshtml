@@ -5,6 +5,38 @@
     Layout = "~/Views/Shared/_LayoutAdminIndex.cshtml";
 }
 
+<script>
+    //function btnSetState(oid) {
+    //    var op = $("#OState").val();
+    //    //alert(op);
+    //    var apiurl = "http://localhost:50728/api/SetOrderState";
+    //    $.ajax({
+    //        url: apiurl + "?oid=" + encodeURI(oid) + "&state=" + encodeURI(op),
+    //        type: "PUT",
+    //        success: function (data) {
+    //            if (data) {
+    //                alert("修改完成");
+    //            }
+    //        }
+    //    });
+    //}
+
+    function OnChangeStste(oid) {
+        var state = $("#OState").val();
+        //alert(state);
+        var apiurl = "http://localhost:50728/api/SetOrderState";
+        $.ajax({
+            url: apiurl + "?oid=" + encodeURI(oid) + "&state=" + encodeURI(state),
+            type: "PUT",
+            success: function (data) {
+                if (data) {
+                    alert("修改完成");
+                }
+            }
+        });
+    }
+</script>
+
 <h2>訂單管理</h2>
 
 <table class="table">
@@ -27,6 +59,9 @@
         <th>
             @Html.DisplayNameFor(model => model.fState)
         </th>
+        @*<th>
+
+            </th>*@
         <th></th>
     </tr>
 
@@ -49,11 +84,23 @@
                 @Html.DisplayFor(modelItem => item.fDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.fState)
+                @*@Html.DisplayFor(modelItem => item.fState)*@
+
+                <select id="OState" name="OState" class="form-control form-control-sm" onchange="OnChangeStste('@item.fOrderID')">
+                    @foreach (var op in ViewBag.Option)
+                    {
+                        <option value="@op.Value" @(item.fState.Equals(op.Text) ? "SELECTED" : "")>@op.Text</option>
+                    }
+                </select>
+                @*<button id="btnSetState" type="button" class="btn btn-success btn-sm my-2 " onclick="btnSetState('@item.fOrderID')">修改狀態</button>*@
             </td>
+            @*<td>
+                    @Html.DropDownList("selector", (IEnumerable<SelectListItem>)ViewBag.Option, new { @class="form-control form-control-sm"})
+
+                </td>*@
             <td>
-                @Html.ActionLink("設定", "OEdit", new { oid = item.fOrderID }, new { @class="btn btn-info"})
-                @Html.ActionLink("刪除", "ODelete", new { oid = item.fOrderID }, new { @class="btn btn-danger"})
+                @*@Html.ActionLink("設定", "OEdit", new { oid = item.fOrderID }, new { @class="btn btn-info"})*@
+                @Html.ActionLink("刪除訂單", "ODelete", new { oid = item.fOrderID }, new { @class = "btn btn-danger btn-sm" })
             </td>
         </tr>
     }
