@@ -214,5 +214,14 @@ namespace MVC_FinalDemo.Controllers
             db.SaveChanges();
             return RedirectToAction("Product", new { id = 1 }) ;
         }
+
+        [Authorize]
+        public ActionResult PDelete(string pd)
+        {
+            var products = db.tProduct.Where(m => m.fProductName == pd).FirstOrDefault();
+            db.tProduct.Remove(products);
+            db.SaveChanges();
+            return RedirectToAction("Product", new { id = 1 });
+        }
     }
 }
