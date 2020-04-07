@@ -56,12 +56,13 @@
                     </td>
                     <td>
                         @Html.ActionLink("編輯", "PEdit", new { pd = item.fProductName }, new { @class = "btn btn-success ", id = "btnAdd" })
-
+                        @Html.ActionLink("刪除", "PDelete", new { pd = item.fProductName }, new { @class = "btn btn-danger ", id = "btnAdd", onclick="return confirm('是否刪除?')" })
                     </td>
 
                 </tr>
             }
 
         </table>
+
     </div>
 </div>
