@@ -214,5 +214,54 @@ namespace MVC_FinalDemo.Controllers
             db.SaveChanges();
             return RedirectToAction("Product", new { id = 1 }) ;
         }
+
+        [Authorize]
+        public ActionResult PDelete(string pd)
+        {
+            var products = db.tProduct.Where(m => m.fProductName == pd).FirstOrDefault();
+            db.tProduct.Remove(products);
+            db.SaveChanges();
+            return RedirectToAction("Product", new { id = 1 });
+        }
+
+        [Authorize]
+        public ActionResult PCreate()
+        {
+            return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult PCreate(string fProductName, string fProductCatagory, int fProductPrice)
+        {
+            var pd = db.tProduct.Where(m => m.fProductName == fProductName).FirstOrDefault();
+            if (pd != null)
+            {
+                ViewBag.IsProduct = true;
+                return View();
+            }
+            string PID = "P";
+            var pCount = db.tProduct.ToList().Count();
+            if (pCount < 10)
+            {
+                PID += "00";
+                PID += pCount;
+            }
+            else if (pCount < 100)
+            {
+                PID += "0";
+                PID += pCount;
+            }
+            tProduct tpd = new tProduct() {
+                fProductID = PID,
+                fProductName = fProductName,
+                fProductCatagory = fProductCatagory,
+                fProductPrice = fProductPrice,
+                fImg = "None"
+            };
+            db.tProduct.Add(tpd);
+            db.SaveChanges();
+            return RedirectToAction("Product", new { id = 1 });
+        }
     }
 }
