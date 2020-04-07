@@ -357,6 +357,7 @@
     <Content Include="Views\Admin\CaEdit.cshtml" />
     <Content Include="Views\Admin\CaCreate.cshtml" />
     <Content Include="Views\Admin\PEdit.cshtml" />
+    <Content Include="Views\Admin\PCreate.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

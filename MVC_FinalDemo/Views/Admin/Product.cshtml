@@ -6,6 +6,7 @@
 }
 
 <h2>產品資料</h2>
+@Html.ActionLink("新增產品", "PCreate")
 <div class="row ">
     <div class="col-md-2 my-5">
         <div class="btn-group" role="group">
@@ -22,6 +23,7 @@
         </div>
     </div>
     <div class="col-md-8">
+
         <table class="table table-striped my-4">
             <tr>
                 <th>
@@ -56,12 +58,13 @@
                     </td>
                     <td>
                         @Html.ActionLink("編輯", "PEdit", new { pd = item.fProductName }, new { @class = "btn btn-success ", id = "btnAdd" })
-
+                        @Html.ActionLink("刪除", "PDelete", new { pd = item.fProductName }, new { @class = "btn btn-danger ", id = "btnAdd", onclick = "return confirm('是否刪除?')" })
                     </td>
 
                 </tr>
             }
 
         </table>
+
     </div>
 </div>
