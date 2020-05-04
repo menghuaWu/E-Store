@@ -7,4 +7,4 @@ ASP.NET MVC 購物網功能實作
 123
 
 > ## 功能說明 :
-![avatar](https://i.imgur.com/KnWfrCA.png)
+![avatar](https://i.imgur.com/TebqcSP.png)
