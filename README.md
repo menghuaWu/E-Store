@@ -8,6 +8,7 @@ ASP.NET MVC 購物網功能實作
 * .Net Framework MVC框架
 * Entity Framework 這裡使用DB first，使用MSSQL的LocalDB
 * Web API 提供前端使用
+
 2.前端 :
 * HTML/CSS/JS
 * bootstrap
