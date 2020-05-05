@@ -9,7 +9,7 @@ ASP.NET MVC 購物網功能實作
 1.後端 :
 * .Net Framework MVC框架
 * Entity Framework 這裡使用DB first，使用MSSQL的LocalDB
-- [Web API 提供前端使用](#第一章)
+- [Web API 提供前端使用](#7)
 * Identity 身分驗證功能
 
 2.前端 :
@@ -38,7 +38,7 @@ ASP.NET MVC 購物網功能實作
 ![avatar](https://i.imgur.com/ZRGxjPP.png)
 ![avatar](https://i.imgur.com/FxmoZk6.png)
 
-7. 這是前端的購物車，這裡使用Web API跟資料庫取資料，其中"+"、"-"、"刪除"按鈕使用AJAX更新購物車資訊，這裡因為是一般用戶，所以導覽列跟前面系統管理員看到的導覽列有所不同。
+<h2 id="7">7. 這是前端的購物車，這裡使用Web API跟資料庫取資料，其中"+"、"-"、"刪除"按鈕使用AJAX更新購物車資訊，這裡因為是一般用戶，所以導覽列跟前面系統管理員看到的導覽列有所不同。</h2>
 ![avatar](https://i.imgur.com/tny3d2P.png)
 
 8. 訂單資訊
