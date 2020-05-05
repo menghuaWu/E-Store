@@ -20,7 +20,7 @@ ASP.NET MVC 購物網功能實作
 ![avatar](https://i.imgur.com/TebqcSP.png)
 
 2. 之後會進入到登入的頁面，可以註冊或是現有的用戶登入。
-<h4 id="7">2. 之後會進入到登入的頁面，可以註冊或是現有的用戶登入。</h4>
+<h4 id="2">2. 之後會進入到登入的頁面，可以註冊或是現有的用戶登入。</h4>
 
 ![avatar](https://i.imgur.com/FLHFJhZ.png)
 
