@@ -28,20 +28,20 @@ ASP.NET MVC 購物網功能實作
 4. 產品管理的頁面使用ViewModel來顯示頁面資訊，選擇產品類別會更新品項的表格。
 ![avatar](https://i.imgur.com/2PslxWY.png)
 
-* 系統管理員可以管理所有的會員，這裡會顯示所有的會員，並且觀看會員的詳細資訊。
+5. 系統管理員可以管理所有的會員，這裡會顯示所有的會員，並且觀看會員的詳細資訊。
 ![avatar](https://i.imgur.com/qOzX51g.png)
 ![avatar](https://i.imgur.com/X23ZIc2.png)
 
-* 系統管理員也可以查看訂單資料，表格中的狀態欄位，若下拉選單有變動，前端對應用戶的訂單資料會跟著更新，達到訂單狀態會隨著出貨付款而改變。
+6. 系統管理員也可以查看訂單資料，表格中的狀態欄位，若下拉選單有變動，前端對應用戶的訂單資料會跟著更新，達到訂單狀態會隨著出貨付款而改變。
 ![avatar](https://i.imgur.com/ZRGxjPP.png)
 ![avatar](https://i.imgur.com/FxmoZk6.png)
 
-* 這是前端的購物車，這裡使用Web API跟資料庫取資料，其中"+"、"-"、"刪除"按鈕使用AJAX更新購物車資訊
+7. 這是前端的購物車，這裡使用Web API跟資料庫取資料，其中"+"、"-"、"刪除"按鈕使用AJAX更新購物車資訊
 ![avatar](https://i.imgur.com/tny3d2P.png)
 
-* 訂單資訊
+8. 訂單資訊
 ![avatar](https://i.imgur.com/ZyBihsW.png)
 ![avatar](https://i.imgur.com/3LMEO0h.png)
 
-* 產品
+9. 產品
 ![avatar](https://i.imgur.com/qhyvxR3.png)
