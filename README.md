@@ -3,8 +3,6 @@ ASP.NET MVC 購物網功能實作
 > ## 說明:
 這是下班之餘跟著網路資源自學ASP.NET MVC所做的購物網站功能實作
 
-<h2 id="First">第一章</h2>
-
 > ## 使用技術:
 1.後端 :
 * .Net Framework MVC框架
@@ -15,7 +13,7 @@ ASP.NET MVC 購物網功能實作
 2.前端 :
 * HTML/CSS/JS
 * bootstrap
-* AJAX介接Web API更新購物車內容
+- [AJAX介接Web API更新購物車內容](#7)
 
 > ## 功能說明 :
 1. 這個頁面是還未有登入驗證的初始頁面，這個頁面列出所有的品項，若點擊加入購物車則會提示用戶必須要登入。
@@ -38,7 +36,7 @@ ASP.NET MVC 購物網功能實作
 ![avatar](https://i.imgur.com/ZRGxjPP.png)
 ![avatar](https://i.imgur.com/FxmoZk6.png)
 
-<h2 id="7">7. 這是前端的購物車，這裡使用Web API跟資料庫取資料，其中"+"、"-"、"刪除"按鈕使用AJAX更新購物車資訊，這裡因為是一般用戶，所以導覽列跟前面系統管理員看到的導覽列有所不同。</h2>
+<h4 id="7">7. 這是前端的購物車，這裡使用Web API跟資料庫取資料，其中"+"、"-"、"刪除"按鈕使用AJAX更新購物車資訊，這裡因為是一般用戶，所以導覽列跟前面系統管理員看到的導覽列有所不同。</h4>
 ![avatar](https://i.imgur.com/tny3d2P.png)
 
 8. 訂單資訊
