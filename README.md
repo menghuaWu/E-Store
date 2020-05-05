@@ -27,5 +27,4 @@ ASP.NET MVC 購物網功能實作
 ![avatar](https://i.imgur.com/tny3d2P.png)
 ![avatar](https://i.imgur.com/ZyBihsW.png)
 ![avatar](https://i.imgur.com/3LMEO0h.png)
-![avatar](https://i.imgur.com/TebqcSP.png)
 ![avatar](https://i.imgur.com/qhyvxR3.png)
