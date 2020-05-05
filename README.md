@@ -9,7 +9,7 @@ ASP.NET MVC 購物網功能實作
 1.後端 :
 * .Net Framework MVC框架
 * Entity Framework 這裡使用DB first，使用MSSQL的LocalDB
-* Web API 提供前端使用
+- [Web API 提供前端使用](#第一章)
 * Identity 身分驗證功能
 
 2.前端 :
@@ -48,4 +48,4 @@ ASP.NET MVC 購物網功能實作
 9. 產品
 ![avatar](https://i.imgur.com/qhyvxR3.png)
 
-- [第一章](#第一章)
+
