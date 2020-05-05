@@ -8,7 +8,7 @@ ASP.NET MVC 購物網功能實作
 * .Net Framework MVC框架
 * Entity Framework 這裡使用DB first，使用MSSQL的LocalDB
 - [Web API 提供前端使用](#7)
-* Identity 身分驗證功能
+- [Identity 身分驗證功能](#2)
 
 2.前端 :
 * HTML/CSS/JS
@@ -20,6 +20,8 @@ ASP.NET MVC 購物網功能實作
 ![avatar](https://i.imgur.com/TebqcSP.png)
 
 2. 之後會進入到登入的頁面，可以註冊或是現有的用戶登入。
+<h4 id="7">2. 之後會進入到登入的頁面，可以註冊或是現有的用戶登入。</h4>
+
 ![avatar](https://i.imgur.com/FLHFJhZ.png)
 
 3. 如果登入的使用者判定為系統管理員，則會進入系統管理的頁面，這裡可以看到導覽列發生改變，導覽列會隨著用戶的權限而改變，目前畫面上的導覽列是系統管理員權限所看到的。
