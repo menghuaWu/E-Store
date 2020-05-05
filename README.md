@@ -37,6 +37,7 @@ ASP.NET MVC 購物網功能實作
 ![avatar](https://i.imgur.com/FxmoZk6.png)
 
 <h4 id="7">7. 這是前端的購物車，這裡使用Web API跟資料庫取資料，其中"+"、"-"、"刪除"按鈕使用AJAX更新購物車資訊，這裡因為是一般用戶，所以導覽列跟前面系統管理員看到的導覽列有所不同。</h4>
+
 ![avatar](https://i.imgur.com/tny3d2P.png)
 
 8. 訂單資訊
