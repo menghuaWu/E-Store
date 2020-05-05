@@ -17,3 +17,14 @@ ASP.NET MVC 購物網功能實作
 
 > ## 功能說明 :
 ![avatar](https://i.imgur.com/TebqcSP.png)
+![avatar](https://i.imgur.com/FLHFJhZ.png)
+![avatar](https://i.imgur.com/3bMUt3U.png)
+![avatar](https://i.imgur.com/2PslxWY.png)
+![avatar](https://i.imgur.com/qOzX51g.png)
+![avatar](https://i.imgur.com/X23ZIc2.png)
+![avatar](https://i.imgur.com/ZRGxjPP.png)
+![avatar](https://i.imgur.com/FxmoZk6.png)
+![avatar](https://i.imgur.com/ZyBihsW.png)
+![avatar](https://i.imgur.com/TebqcSP.png)
+![avatar](https://i.imgur.com/TebqcSP.png)
+![avatar](https://i.imgur.com/qhyvxR3.png)
