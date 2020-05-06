@@ -36,6 +36,7 @@ ASP.NET MVC 購物網功能實作
 <h4 id="2" style="font-size:22px;">5. 系統管理員可以管理所有的會員，這裡會顯示所有的會員，並且觀看會員的詳細資訊。</h4>
 
 ![avatar](https://i.imgur.com/qOzX51g.png)
+>
 ![avatar](https://i.imgur.com/X23ZIc2.png)
 
 <h4 id="2" style="font-size:22px;">6. 系統管理員也可以查看訂單資料，表格中的狀態欄位，若下拉選單有變動，前端對應用戶的訂單資料會跟著更新，達到訂單狀態會隨著出貨付款而改變。</h4>
