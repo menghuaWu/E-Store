@@ -1,7 +1,7 @@
 ASP.NET MVC 購物網功能實作
 =======================
-> ## ``概訴``  :  
 
+> ## ``概訴``:
 這是下班之餘跟著網路資源自學 ASP.NET MVC 所做的購物網站功能實作。  
 > ## ``使用技術`` :
 1.後端 :
@@ -17,6 +17,9 @@ ASP.NET MVC 購物網功能實作
 - [AJAX介接Web API更新購物車內容](#7)
 
 > ## ``功能說明`` : 
+<div style="bg-color : red;">123</div>
+<font color=#FF6600>橘色</font>
+
 <h4 id="2" style="font-size:22px;">1. 這個頁面是還未有登入驗證的初始頁面，這個頁面列出所有的品項，若點擊加入購物車則會提示用戶必須要登入。</h4>  
 
 ![avatar](https://i.imgur.com/TebqcSP.png)    
