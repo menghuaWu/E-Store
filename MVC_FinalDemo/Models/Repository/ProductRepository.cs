@@ -49,6 +49,11 @@ namespace MVC_FinalDemo.Models.Repository
             return _db.tProduct.Where(m => m.fProductName == productName).FirstOrDefault();
         }
 
+        public tProduct GetByProductID(string productId)
+        {
+            return _db.tProduct.Where(m=>m.fProductID == productId).FirstOrDefault();
+        }
+
         public IEnumerable<tProduct> GetAll()
         {
             return _db.tProduct.OrderBy(x => x.fProductID).ToList();

@@ -17,6 +17,7 @@ namespace MVC_FinalDemo.Models.Interface
         tProduct Get(int productID);
 
         tProduct GetByName(string productName);
+        tProduct GetByProductID(string productID);
 
         IEnumerable<tProduct> GetAll();
 

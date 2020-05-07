@@ -17,6 +17,7 @@ namespace MVC_FinalDemo.Models.Interface
         tCatagory Get(int categoryID);
 
         tCatagory GetByName(string categoryName);
+        tCatagory GetByCategoryID(string categoryID);
 
         IEnumerable<tCatagory> GetAll();
 

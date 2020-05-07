@@ -4,11 +4,26 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MVC_FinalDemo.Models;
+using MVC_FinalDemo.Models.Interface;
+using MVC_FinalDemo.Models.Repository;
 
 namespace MVC_FinalDemo.Controllers
 {
     public class AdminController : Controller
     {
+        private IProductRepository _productRepository;
+        private ICategoryRepository _categoryRepository;
+        private ICustomerRepository _customerRepository;
+        private IOrderRepository _orderRepository;
+        private IOrderDetailRepository _orderDetailRepository;
+        public AdminController()
+        {
+            _productRepository = new ProductRepository();
+            _categoryRepository = new CategoryRepository();
+            _customerRepository = new CustomerRepository();
+            _orderRepository = new OrderRepository();
+            _orderDetailRepository = new OrderDetailRepository();
+        }
         public List<SelectListItem> GetItem()
         {
             List<SelectListItem> ls = new List<SelectListItem>()
@@ -22,7 +37,7 @@ namespace MVC_FinalDemo.Controllers
             return ls;
         }
         
-        dbEStoreEntities db = new dbEStoreEntities();
+        //dbEStoreEntities db = new dbEStoreEntities();
         ProductCategoryViewModel pcvm = new ProductCategoryViewModel();
         // GET: Admin
         [Authorize]
@@ -30,7 +45,7 @@ namespace MVC_FinalDemo.Controllers
         {
             if (User.Identity.Name == "root")
             {
-                return View(db.tProduct.ToList());
+                return View(_productRepository.GetAll());
             }
             return RedirectToAction("Index", "Home");
         }
@@ -42,9 +57,12 @@ namespace MVC_FinalDemo.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            var catName = db.tCatagory.Where(m => m.Id == id).FirstOrDefault();
-            pcvm.Products = db.tProduct.Where(m => m.fProductCatagory == catName.fName).ToList();
-            pcvm.Category = db.tCatagory.ToList();
+            //var catName = db.tCatagory.Where(m => m.Id == id).FirstOrDefault();
+            var catName = _categoryRepository.Get(id);
+            //pcvm.Products = db.tProduct.Where(m => m.fProductCatagory == catName.fName).ToList();
+            pcvm.Products = _productRepository.GetAllByCategory(catName.fName).ToList();
+            //pcvm.Category = db.tCatagory.ToList();
+            pcvm.Category = _categoryRepository.GetAll().ToList();
             return View(pcvm);
 
         }
@@ -52,7 +70,7 @@ namespace MVC_FinalDemo.Controllers
         [Authorize]
         public ActionResult Category()
         {
-            return View(db.tCatagory.ToList());
+            return View(_categoryRepository.GetAll().ToList());
         }
 
         [Authorize]
@@ -65,8 +83,10 @@ namespace MVC_FinalDemo.Controllers
         [HttpPost]
         public ActionResult CaCreate(string fName)
         {
-            var cats = db.tCatagory.Where(m=>m.fName == fName).FirstOrDefault();
-            var count = db.tCatagory.ToList().Count();
+            //var cats = db.tCatagory.Where(m=>m.fName == fName).FirstOrDefault();
+            var cats = _categoryRepository.GetByName(fName);
+            //var count = db.tCatagory.ToList().Count();
+            var count = _categoryRepository.GetAll().Count();
             var cid = "A";
             
             if (cats == null)
@@ -79,8 +99,9 @@ namespace MVC_FinalDemo.Controllers
                     fCatagoryID = cid + (++count),
                     fName = fName,
                 };
-                db.tCatagory.Add(cat);
-                db.SaveChanges();
+                //db.tCatagory.Add(cat);
+                _categoryRepository.Create(cat);
+                //db.SaveChanges();
                 return RedirectToAction("Category");
             }
             ViewBag.isCate = true;
@@ -94,8 +115,9 @@ namespace MVC_FinalDemo.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            var catagory = db.tCatagory.Where(m=>m.fCatagoryID == cid).FirstOrDefault();
-            return View(catagory);
+            //var catagory = db.tCatagory.Where(m=>m.fCatagoryID == cid).FirstOrDefault();
+            var category = _categoryRepository.GetByCategoryID(cid);
+            return View(category);
         }
 
         [Authorize]
@@ -106,14 +128,20 @@ namespace MVC_FinalDemo.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            var cats = db.tCatagory.Where(m=>m.fCatagoryID == fCatagoryID).FirstOrDefault();
+            //var cats = db.tCatagory.Where(m=>m.fCatagoryID == fCatagoryID).FirstOrDefault();
+            var cats = _categoryRepository.GetByCategoryID(fCatagoryID);
             cats.fName = fName;
-            var pds = db.tProduct.Where(m => m.fProductCatagory == oldName).ToList();
+            _categoryRepository.Update(cats);
+            //var pds = db.tProduct.Where(m => m.fProductCatagory == oldName).ToList();
+            var pds = _productRepository.GetAllByCategory(oldName).ToList();
             foreach (var pd in pds)
             {
                 pd.fProductCatagory = fName;
+                _productRepository.Update(pd);
             }
-            db.SaveChanges();
+            //db.SaveChanges();
+            
+            _productRepository.SaveChanges();
             return RedirectToAction("Category");
         }
 
@@ -124,7 +152,7 @@ namespace MVC_FinalDemo.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            return View(db.tCustomer.ToList());
+            return View(_customerRepository.GetAll());
         }
 
         [Authorize]
@@ -134,7 +162,8 @@ namespace MVC_FinalDemo.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            var cust = db.tCustomer.Where(m => m.fCustomerID == cid).FirstOrDefault();
+            //var cust = db.tCustomer.Where(m => m.fCustomerID == cid).FirstOrDefault();
+            var cust = _customerRepository.GetByCustomerID(cid);
             return View(cust);
         }
 
@@ -146,8 +175,9 @@ namespace MVC_FinalDemo.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            db.Entry(cus).State = System.Data.Entity.EntityState.Modified;
-            db.SaveChanges();
+            _customerRepository.Update(cus);
+            //db.Entry(cus).State = System.Data.Entity.EntityState.Modified;
+            //db.SaveChanges();
             return RedirectToAction("Member");
         }
 
@@ -158,9 +188,11 @@ namespace MVC_FinalDemo.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            var cust = db.tCustomer.Where(m=>m.fCustomerID == cid).FirstOrDefault();
-            db.Entry(cust).State = System.Data.Entity.EntityState.Deleted;
-            db.SaveChanges();
+            //var cust = db.tCustomer.Where(m=>m.fCustomerID == cid).FirstOrDefault();
+            var cust = _customerRepository.GetByCustomerID(cid);
+            _customerRepository.Delete(cust);
+            //db.Entry(cust).State = System.Data.Entity.EntityState.Deleted;
+            //db.SaveChanges();
             return RedirectToAction("Member");
         }
 
@@ -172,22 +204,22 @@ namespace MVC_FinalDemo.Controllers
                 return RedirectToAction("Index", "Home");
             }
             ViewBag.Option = GetItem();
-            return View(db.tOrder.ToList());
+            return View(_orderRepository.GetAll().ToList());
         }
-        //[Authorize]
-        //public ActionResult OEdit(string oid)
-        //{
 
-        //}
 
         [Authorize]
         public ActionResult ODelete( string oid)
         {
-            var odr = db.tOrder.Where(m=>m.fOrderID == oid).FirstOrDefault();
-            var odt = db.tOrderDetail.Where(m => m.fOrderID == oid).ToList();
-            db.tOrderDetail.RemoveRange(odt);
-            db.tOrder.Remove(odr);
-            db.SaveChanges();
+            //var odr = db.tOrder.Where(m=>m.fOrderID == oid).FirstOrDefault();
+            var odr = _orderRepository.GetById(oid).FirstOrDefault();
+            //var odt = db.tOrderDetail.Where(m => m.fOrderID == oid).ToList();
+            var odt = _orderDetailRepository.GetById(oid).ToList();
+            //db.tOrderDetail.RemoveRange(odt);
+            _orderDetailRepository.DeleteRange(odt);
+            //db.tOrder.Remove(odr);
+            _orderRepository.Delete(odr);
+            //db.SaveChanges();
             return RedirectToAction("Order");
         }
 
@@ -198,8 +230,10 @@ namespace MVC_FinalDemo.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            var product = db.tProduct.Where(m=>m.fProductName == pd).FirstOrDefault();
-            ViewBag.Category = db.tCatagory.ToList();
+            //var product = db.tProduct.Where(m=>m.fProductName == pd).FirstOrDefault();
+            var product = _productRepository.GetByName(pd);
+            //ViewBag.Category = db.tCatagory.ToList();
+            ViewBag.Category = _categoryRepository.GetAll();
             return View(product);
         }
 
@@ -207,20 +241,24 @@ namespace MVC_FinalDemo.Controllers
         [HttpPost]
         public ActionResult PEdit(string fProductID, string fProductName, string fProductCatagory, int fProductPrice)
         {
-            var pd = db.tProduct.Where(m => m.fProductID == fProductID).FirstOrDefault();
+            //var pd = db.tProduct.Where(m => m.fProductID == fProductID).FirstOrDefault();
+            var pd = _productRepository.GetByProductID(fProductID);
             pd.fProductName = fProductName;
             pd.fProductCatagory = fProductCatagory;
             pd.fProductPrice = fProductPrice;
-            db.SaveChanges();
+            //db.SaveChanges();
+            _productRepository.SaveChanges();
             return RedirectToAction("Product", new { id = 1 }) ;
         }
 
         [Authorize]
         public ActionResult PDelete(string pd)
         {
-            var products = db.tProduct.Where(m => m.fProductName == pd).FirstOrDefault();
-            db.tProduct.Remove(products);
-            db.SaveChanges();
+            //var products = db.tProduct.Where(m => m.fProductName == pd).FirstOrDefault();
+            var products = _productRepository.GetByName(pd);
+            //db.tProduct.Remove(products);
+            _productRepository.Delete(products);
+            //db.SaveChanges();
             return RedirectToAction("Product", new { id = 1 });
         }
 
@@ -234,14 +272,16 @@ namespace MVC_FinalDemo.Controllers
         [HttpPost]
         public ActionResult PCreate(string fProductName, string fProductCatagory, int fProductPrice)
         {
-            var pd = db.tProduct.Where(m => m.fProductName == fProductName).FirstOrDefault();
+            //var pd = db.tProduct.Where(m => m.fProductName == fProductName).FirstOrDefault();
+            var pd = _productRepository.GetByName(fProductName);
             if (pd != null)
             {
                 ViewBag.IsProduct = true;
                 return View();
             }
             string PID = "P";
-            var pCount = db.tProduct.ToList().Count();
+            //var pCount = db.tProduct.ToList().Count();
+            var pCount = _productRepository.GetAll().Count();
             if (pCount < 10)
             {
                 PID += "00";
@@ -259,8 +299,9 @@ namespace MVC_FinalDemo.Controllers
                 fProductPrice = fProductPrice,
                 fImg = "None"
             };
-            db.tProduct.Add(tpd);
-            db.SaveChanges();
+            //db.tProduct.Add(tpd);
+            _productRepository.Create(tpd);
+            //db.SaveChanges();
             return RedirectToAction("Product", new { id = 1 });
         }
     }

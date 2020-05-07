@@ -57,7 +57,10 @@ namespace MVC_FinalDemo.Models.Repository
             return _db.tCatagory.Where(m => m.fName == categoryName).FirstOrDefault();
         }
 
-
+        public tCatagory GetByCategoryID(string categoryID)
+        {
+            return _db.tCatagory.Where(m=>m.fCatagoryID == categoryID).FirstOrDefault();
+        }
         public void Update(tCatagory catagory)
         {
             if (catagory == null)
