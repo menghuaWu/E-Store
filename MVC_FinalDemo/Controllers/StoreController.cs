@@ -4,18 +4,26 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MVC_FinalDemo.Models;
+using MVC_FinalDemo.Models.Interface;
+using MVC_FinalDemo.Models.Repository;
 
 namespace MVC_FinalDemo.Controllers
 {
     public class StoreController : Controller
     {
+        private IProductRepository _productRepository;
+
+        public StoreController()
+        {
+            _productRepository = new ProductRepository();
+        }
         dbEStoreEntities db = new dbEStoreEntities();
         ProductCategoryViewModel pcvm = new ProductCategoryViewModel();
         // GET: Store
         [Authorize]
         public ActionResult Index()
         {
-            return View(db.tProduct.ToList());
+            return View(_productRepository.GetAll());
         }
 
         [Authorize]
@@ -30,7 +38,8 @@ namespace MVC_FinalDemo.Controllers
             }
             else
             {
-                var product = db.tProduct.Where(m=>m.fProductName == pd).FirstOrDefault();
+                //var product = db.tProduct.Where(m=>m.fProductName == pd).FirstOrDefault();
+                var product = _productRepository.GetByName(pd);
                 tCart cart = new tCart()
                 {
                     fCustomerName = User.Identity.Name,
@@ -70,7 +79,8 @@ namespace MVC_FinalDemo.Controllers
         public ActionResult Detail(int id=1)
         {
             var catName = db.tCatagory.Where(m => m.Id == id).FirstOrDefault();
-            pcvm.Products = db.tProduct.Where(m=>m.fProductCatagory == catName.fName).ToList();
+            //pcvm.Products = db.tProduct.Where(m=>m.fProductCatagory == catName.fName).ToList();
+            pcvm.Products = _productRepository.GetAllByCategory(catName.fName).ToList();
             pcvm.Category = db.tCatagory.ToList();
             if (User.Identity.Name == "")
             {
