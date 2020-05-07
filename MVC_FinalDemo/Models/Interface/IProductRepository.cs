@@ -20,6 +20,7 @@ namespace MVC_FinalDemo.Models.Interface
 
         IEnumerable<tProduct> GetAll();
 
+
         IEnumerable<tProduct> GetAllByCategory(string category);
 
         void SaveChanges();

@@ -5,12 +5,20 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using MVC_FinalDemo.Models;
+using MVC_FinalDemo.Models.Interface;
+using MVC_FinalDemo.Models.Repository;
 
 namespace MVC_FinalDemo.Controllers
 {
     public class SetOrderStateController : ApiController
     {
-        dbEStoreEntities db = new dbEStoreEntities();
+        private IOrderRepository _orderRepository;
+        public SetOrderStateController()
+        {
+            _orderRepository = new OrderRepository();
+        }
+
+        //dbEStoreEntities db = new dbEStoreEntities();
         // GET: api/SetOrderState
         public IEnumerable<string> Get()
         {
@@ -31,9 +39,10 @@ namespace MVC_FinalDemo.Controllers
         // PUT: api/SetOrderState/5
         public bool Put(string oid, string state)
         {
-            var odr = db.tOrder.Where(m=>m.fOrderID == oid).FirstOrDefault();
+            //var odr = db.tOrder.Where(m=>m.fOrderID == oid).FirstOrDefault();
+            var odr = _orderRepository.GetById(oid).FirstOrDefault();
             odr.fState = state;
-            db.SaveChanges();
+            _orderRepository.SaveChanges();
             return true;
         }
 

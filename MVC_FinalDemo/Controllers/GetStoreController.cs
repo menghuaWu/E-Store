@@ -5,12 +5,19 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using MVC_FinalDemo.Models;
+using MVC_FinalDemo.Models.Interface;
+using MVC_FinalDemo.Models.Repository;
 
 namespace MVC_FinalDemo.Controllers
 {
     public class GetStoreController : ApiController
     {
-        dbEStoreEntities db = new dbEStoreEntities();
+        private IOrderDetailRepository _orderDetailRepository;
+        public GetStoreController()
+        {
+            _orderDetailRepository = new OrderDetailRepository();
+        }
+        //dbEStoreEntities db = new dbEStoreEntities();
         // GET: api/GetStore
         public IEnumerable<string> Get()
         {
@@ -20,7 +27,8 @@ namespace MVC_FinalDemo.Controllers
         // GET: api/GetStore/5
         public IEnumerable<tOrderDetail> Get(string odr)
         {
-            var dtl = db.tOrderDetail.Where(m=>m.fOrderID == odr).ToList();
+            //var dtl = db.tOrderDetail.Where(m=>m.fOrderID == odr).ToList();
+            var dtl = _orderDetailRepository.GetById(odr).ToList();
             return dtl;
         }
 

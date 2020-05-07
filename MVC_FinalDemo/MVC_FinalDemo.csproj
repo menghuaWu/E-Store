@@ -294,8 +294,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EStoreModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Interface\ICartRepository.cs" />
+    <Compile Include="Models\Interface\ICategoryRepository.cs" />
+    <Compile Include="Models\Interface\IOrderDetailRepository.cs" />
+    <Compile Include="Models\Interface\IOrderRepository.cs" />
     <Compile Include="Models\Interface\IProductRepository.cs" />
     <Compile Include="Models\ProductCategoryViewModel.cs" />
+    <Compile Include="Models\Repository\CartRepository.cs" />
+    <Compile Include="Models\Repository\CategoryRepository.cs" />
+    <Compile Include="Models\Repository\OrderDetailRepository.cs" />
+    <Compile Include="Models\Repository\OrderRepository.cs" />
     <Compile Include="Models\Repository\ProductRepository.cs" />
     <Compile Include="Models\tAdmin.cs">
       <DependentUpon>EStoreModel.tt</DependentUpon>
