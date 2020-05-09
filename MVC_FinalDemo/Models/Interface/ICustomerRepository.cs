@@ -6,23 +6,14 @@ using System.Threading.Tasks;
 
 namespace MVC_FinalDemo.Models.Interface
 {
-    public interface ICustomerRepository : IDisposable
+    public interface ICustomerRepository : IDisposable, IRepository<tCustomer>
     {
-        
-        void Create(tCustomer customer);
 
-        void Update(tCustomer customer);
-
-        void Delete(tCustomer customer);
 
         tCustomer Get(int id);
 
         tCustomer GetByName(string customerName);
         tCustomer GetByCustomerID(string customerId);
 
-        IEnumerable<tCustomer> GetAll();
-
-
-        void SaveChanges();
     }
 }

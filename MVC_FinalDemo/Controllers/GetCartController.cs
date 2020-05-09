@@ -59,7 +59,7 @@ namespace MVC_FinalDemo.Controllers
                 cartItem.fProductCount++;
                 cartItem.fTotalPrice = cartItem.fProductPrice * cartItem.fProductCount;
                 //db.SaveChanges();
-                _cartRepository.SaveChanges();
+                _cartRepository.Save();
             }
             else
             {
@@ -95,7 +95,7 @@ namespace MVC_FinalDemo.Controllers
                     cart.fProductCount++;
                     cart.fTotalPrice = cart.fProductCount * cart.fProductPrice;
                     //k = db.SaveChanges();
-                    k = _cartRepository.SaveChanges();
+                    k = _cartRepository.Save();
                 }
                 catch (Exception)
                 {
@@ -122,7 +122,7 @@ namespace MVC_FinalDemo.Controllers
                     cart.fProductCount--;
                     cart.fTotalPrice = cart.fProductCount * cart.fProductPrice;
                     //k = db.SaveChanges();
-                    k = _cartRepository.SaveChanges();
+                    k = _cartRepository.Save();
                 }
                 catch (Exception)
                 {
@@ -150,7 +150,7 @@ namespace MVC_FinalDemo.Controllers
                 //db.tCart.Remove(cart);
                 _cartRepository.Delete(cart);
                 //k = db.SaveChanges();
-                k = _cartRepository.SaveChanges();
+                k = _cartRepository.Save();
             }
             catch (Exception)
             {

@@ -23,7 +23,7 @@ namespace MVC_FinalDemo.Models.Repository
             else
             {
                 _db.tCart.Add(cart);
-                SaveChanges();
+                Save();
             }
         }
 
@@ -43,7 +43,7 @@ namespace MVC_FinalDemo.Models.Repository
         public void DeleteRange(List<tCart> carts)
         {
             _db.tCart.RemoveRange(carts);
-            SaveChanges();
+            Save();
         }
         public tCart Get(int cartID)
         {
@@ -77,7 +77,7 @@ namespace MVC_FinalDemo.Models.Repository
             throw new NotImplementedException();
         }
 
-        public int SaveChanges()
+        public int Save()
         {
             int k = 0;
             k = _db.SaveChanges();
@@ -101,6 +101,9 @@ namespace MVC_FinalDemo.Models.Repository
             }
         }
 
-       
+        public void SaveChanges()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

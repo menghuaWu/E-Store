@@ -44,7 +44,7 @@ namespace MVC_FinalDemo.Controllers
                 cartItem.fProductCount++;
                 cartItem.fTotalPrice = cartItem.fProductPrice * cartItem.fProductCount;
                 //db.SaveChanges();
-                _cartRepository.SaveChanges();
+                _cartRepository.Save();
             }
             else
             {

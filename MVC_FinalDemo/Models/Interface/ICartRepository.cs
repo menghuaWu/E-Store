@@ -6,13 +6,9 @@ using System.Threading.Tasks;
 
 namespace MVC_FinalDemo.Models.Interface
 {
-    public interface ICartRepository : IDisposable
+    public interface ICartRepository : IDisposable, IRepository<tCart>
     {
-        void Create(tCart cart);
-
-        void Update(tCart cart);
-
-        void Delete(tCart cart);
+        
 
         void DeleteRange(List<tCart> carts);
 
@@ -23,9 +19,8 @@ namespace MVC_FinalDemo.Models.Interface
 
         tCart GetByProductNameAndUsr(string productName, string usrName);
 
-        IEnumerable<tCart> GetAll();
 
 
-        int SaveChanges();
+        int Save();
     }
 }

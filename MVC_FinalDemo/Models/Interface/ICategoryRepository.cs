@@ -6,22 +6,14 @@ using System.Threading.Tasks;
 
 namespace MVC_FinalDemo.Models.Interface
 {
-    public interface ICategoryRepository : IDisposable
+    public interface ICategoryRepository : IDisposable, IRepository<tCatagory>
     {
-        void Create(tCatagory catagory);
-
-        void Update(tCatagory catagory);
-
-        void Delete(tCatagory catagory);
+       
 
         tCatagory Get(int categoryID);
 
         tCatagory GetByName(string categoryName);
         tCatagory GetByCategoryID(string categoryID);
 
-        IEnumerable<tCatagory> GetAll();
-
-
-        void SaveChanges();
     }
 }

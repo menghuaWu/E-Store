@@ -57,5 +57,10 @@ namespace MVC_FinalDemo.Models.Repository
         {
             throw new NotImplementedException();
         }
+
+        public IEnumerable<tOrderDetail> GetAll()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

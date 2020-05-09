@@ -6,24 +6,20 @@ using System.Threading.Tasks;
 
 namespace MVC_FinalDemo.Models.Interface
 {
-    public interface IProductRepository : IDisposable
+    public interface IProductRepository : IDisposable, IRepository<tProduct>
     {
-        void Create(tProduct product);
-
-        void Update(tProduct product);
-
-        void Delete(tProduct product);
+        
 
         tProduct Get(int productID);
 
         tProduct GetByName(string productName);
         tProduct GetByProductID(string productID);
 
-        IEnumerable<tProduct> GetAll();
+        
 
 
         IEnumerable<tProduct> GetAllByCategory(string category);
 
-        void SaveChanges();
+        
     }
 }

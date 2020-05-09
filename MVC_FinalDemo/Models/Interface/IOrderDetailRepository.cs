@@ -6,18 +6,14 @@ using System.Threading.Tasks;
 
 namespace MVC_FinalDemo.Models.Interface
 {
-    public interface IOrderDetailRepository : IDisposable
+    public interface IOrderDetailRepository : IDisposable, IRepository<tOrderDetail>
     {
-        void Create(tOrderDetail orderDetail);
 
-        void Update(tOrderDetail orderDetail);
-
-        void Delete(tOrderDetail orderDetail);
 
         IEnumerable<tOrderDetail> GetById(string oid);
 
         void DeleteRange(List<tOrderDetail> orders);
 
-        void SaveChanges();
+        
     }
 }
